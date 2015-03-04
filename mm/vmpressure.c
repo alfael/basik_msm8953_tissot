@@ -36,15 +36,6 @@
 static const unsigned int vmpressure_level_med = 60;
 static const unsigned int vmpressure_level_critical = 95;
 
-static unsigned long vmpressure_scale_max = 100;
-module_param_named(vmpressure_scale_max, vmpressure_scale_max,
-			ulong, 0644);
-
-/* vmpressure values >= this will be scaled based on allocstalls */
-static unsigned long allocstall_threshold = 70;
-module_param_named(allocstall_threshold, allocstall_threshold,
-			ulong, 0644);
-
 static struct vmpressure global_vmpressure;
 static BLOCKING_NOTIFIER_HEAD(vmpressure_notifier);
 
@@ -157,19 +148,6 @@ out:
 		 scanned, reclaimed);
 
 	return pressure;
-}
-
-static unsigned long vmpressure_account_stall(unsigned long pressure,
-				unsigned long stall, unsigned long scanned)
-{
-	unsigned long scale;
-
-	if (pressure < allocstall_threshold)
-		return pressure;
-
-	scale = ((vmpressure_scale_max - pressure) * stall) / scanned;
-
-	return pressure + scale;
 }
 
 struct vmpressure_event {
@@ -344,31 +322,24 @@ static void vmpressure_memcg(gfp_t gfp, struct mem_cgroup *memcg, bool critical,
 			     unsigned long reclaimed) { }
 #endif
 
-static void vmpressure_global(gfp_t gfp, unsigned long scanned, bool critical,
-			      unsigned long reclaimed)
+static void vmpressure_global(gfp_t gfp, unsigned long scanned,
+		unsigned long reclaimed)
 {
 	struct vmpressure *vmpr = &global_vmpressure;
 	unsigned long pressure;
-	unsigned long stall;
 
 	if (!(gfp & (__GFP_HIGHMEM | __GFP_MOVABLE | __GFP_IO | __GFP_FS)))
 		return;
 
-	if (critical)
-		scanned = calculate_vmpressure_win();
+	if (!scanned)
+		return;
 
-	if (scanned) {
-		spin_lock(&vmpr->sr_lock);
-		vmpr->scanned += scanned;
-		vmpr->reclaimed += reclaimed;
-
-		if (!current_is_kswapd())
-			vmpr->stall += scanned;
-
-		stall = vmpr->stall;
-		scanned = vmpr->scanned;
-		reclaimed = vmpr->reclaimed;
-		spin_unlock(&vmpr->sr_lock);
+	spin_lock(&vmpr->sr_lock);
+	vmpr->scanned += scanned;
+	vmpr->reclaimed += reclaimed;
+	scanned = vmpr->scanned;
+	reclaimed = vmpr->reclaimed;
+	spin_unlock(&vmpr->sr_lock);
 
 		if (!critical && scanned < calculate_vmpressure_win())
 			return;
@@ -377,15 +348,9 @@ static void vmpressure_global(gfp_t gfp, unsigned long scanned, bool critical,
 	spin_lock(&vmpr->sr_lock);
 	vmpr->scanned = 0;
 	vmpr->reclaimed = 0;
-	vmpr->stall = 0;
 	spin_unlock(&vmpr->sr_lock);
 
-	if (scanned) {
-		pressure = vmpressure_calc_pressure(scanned, reclaimed);
-		pressure = vmpressure_account_stall(pressure, stall, scanned);
-	} else {
-		pressure = 100;
-	}
+	pressure = vmpressure_calc_pressure(scanned, reclaimed);
 	vmpressure_notify(pressure);
 }
 
@@ -424,7 +389,11 @@ static void __vmpressure(gfp_t gfp, struct mem_cgroup *memcg, bool critical,
 void vmpressure(gfp_t gfp, struct mem_cgroup *memcg, bool tree,
 		unsigned long scanned, unsigned long reclaimed)
 {
-	__vmpressure(gfp, memcg, false, tree, scanned, reclaimed);
+	if (!memcg)
+		vmpressure_global(gfp, scanned, reclaimed);
+
+	if (IS_ENABLED(CONFIG_MEMCG))
+		vmpressure_memcg(gfp, memcg, tree, scanned, reclaimed);
 }
 
 /**
