@@ -387,7 +387,6 @@ struct sock {
 	int			sk_sndbuf;
 
 	/* ===== cache line for TX ===== */
-	int			sk_wmem_queued;
 	atomic_t		sk_wmem_alloc;
 	unsigned long		sk_tsq_flags;
 	struct sk_buff		*sk_send_head;
@@ -406,7 +405,6 @@ struct sock {
 	netdev_features_t	sk_route_nocaps;
 	int			sk_gso_type;
 	unsigned int		sk_gso_max_size;
-	gfp_t			sk_allocation;
 	__u32			sk_txhash;
 
 	/*
@@ -423,6 +421,9 @@ struct sock {
 #define SK_PROTOCOL_MAX U8_MAX
 	kmemcheck_bitfield_end(flags);
 
+	int			sk_wmem_queued;
+	gfp_t			sk_allocation;
+	netdev_features_t	sk_route_forced_caps;
 	u16			sk_gso_max_segs;
 	unsigned long	        sk_lingertime;
 	struct proto		*sk_prot_creator;
