@@ -1,9 +1,8 @@
 #!/bin/bash
 cd $(dirname $0)
-export PATH="$HOME/toolchain/eva/bin:$PATH"
-export PATH="$HOME/toolchain/eva64/bin:$PATH"
-export CROSS_COMPILE=aarch64-elf-
-export CROSS_COMPILE_ARM32=arm-eabi-
+export PATH="$HOME/toolchain/proton-clang/bin:$PATH"
+export CROSS_COMPILE=aarch64-linux-gnu-
+export CROSS_COMPILE_ARM32=arm-linux-gnueabi-
 export ARCH=arm64
 export SUBARCH=arm64
 export KBUILD_CFLAGS="-Wno-maybe-uninitialized -Wno-memset-elt-size -Wno-duplicate-decl-specifier"
@@ -11,12 +10,11 @@ if [ ! -d "./output/" ]; then
         mkdir ./output/
 fi
 rm -r ./output/*
-make O=output clean
-make O=output mrproper
-make O=output basik_defconfig
-make O=output -j$(nproc --all) 2>&1 | tee build.log
+make CC=clang O=output clean
+make CC=clang O=output mrproper
+make CC=clang O=output shrimp-tissot_defconfig
+make CC=clang O=output CC=clang AR=llvm-ar NM=llvm-nm OBJCOPY=llvm-objcopy OBJDUMP=llvm-objdump STRIP=llvm-strip  -j$(nproc --all) 2>&1 | tee build.log
 exit
-
 #Generation package anykernel
 PATH_OUTPUT=output/arch/arm64/boot
 PATH_KERN=$PATH_OUTPUT/Image.gz
@@ -49,7 +47,7 @@ do
         if [ ! -z "$LOCALVERSION" ]; then
                 break;
         fi
-done < arch/arm64/configs/basik_defconfig
+done < arch/arm64/configs/shrimp-tissot_defconfig
 
 /bin/cp -rf $PATH_KERN $PATH_PACKAGE/kernel
 /bin/cp -rf $PATH_QCOM/msm8953-qrd-sku3-tissot-treble.dtb $PATH_PACKAGE/dtb-treble
