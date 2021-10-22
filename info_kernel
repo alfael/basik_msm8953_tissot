@@ -1,0 +1,41 @@
+**********************************************************
+==========================INFO===========================
+*********************************************************
+    - KERNEL NAME -> [BasiK]
+    - LINUX KERNEL VERSION -> [4.9.287]
+    - CUSTOM KERNEL VERSION -> [#0]
+    - LAST TOOLCHAIN VERSION AT RELEASE KERNEL DATE -> [vortex-clang(14)]
+    - TARGET ANDROID VERSION -> [11]
+    - LAST VERSION DATE -> [2021-10-11]
+    - Main purpose of this kernel is to be up to the
+      latest tag of linux 4.9 with the best delivery of
+      performance and battery to use as is.
+
+*********************************************************
+=========================FEATURE=========================
+*********************************************************
+    - CAF TAG ON LATEST KERNEL VERSION -> [LA.UM.9.6.2.c25-00800-89xx.0]
+    - DEFAULT GOVERNOR -> [SCHEDUTIL]
+    - DEFAULT I/O SCHEDULER -> [NOOP]
+    - DEFAULT TCP CONGESTION CONTROL -> [BBR with backport optimization]
+    - LATENCY IS PREFERRED TO THROUGHPUT -> [SMOOTH EXPERIENCE with bad benchmark]
+    - TOOLCHAIN OPTIMIZATION -> [MCPU/MTUNE/LTO/O3/FUNSAFE-MATH-OPTIMIZATIONS]
+    - MANY DEBUGGER DISABLED -> [PERFORMANCE/BATTERY GAIN]
+    - ARM64 OPTIMIZATIONS
+    - MSM8953 OPTIMIZATIONS
+    - RAPID GC F2FS by arter97
+    - WIREGUARD V1.0.20210606
+    - NETWORK IMPROVEMENT
+    - GPU IMPROVEMENT
+    - SOUND IMPROVEMENT
+    - BATTERY IMPROVEMENT
+    - VM VALUES TWEAKED
+    - BOEFFLA WAKELOCK BLOCKER
+    - CPU SCHEDULER (CFS) TWEAKED FROM LIQUORIX/ZEN KERNEL
+    - DTS EAGLE
+    - DYNAMIC FSYNC V2 -> ENABLED BY DEFAULT
+    - ADRENOBOOST -> ENABLED BY DEFAULT
+    - TOUCHBOOST -> DISABLED BY DEFAULT
+    - SIMPLE LMK by kerneltoast
+    - KCAL
+    - BACKPORT OPTIMIZATION FROM OTHER KERNEL VERSION 
