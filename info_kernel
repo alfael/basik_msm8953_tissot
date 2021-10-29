@@ -2,11 +2,11 @@
 ==========================INFO===========================
 *********************************************************
     - KERNEL NAME -> [BasiK]
-    - LINUX KERNEL VERSION -> [4.9.287]
+    - LINUX KERNEL VERSION -> [4.9.288]
     - CUSTOM KERNEL VERSION -> [#0]
     - LAST TOOLCHAIN VERSION AT RELEASE KERNEL DATE -> [vortex-clang(14)]
     - TARGET ANDROID VERSION -> [11]
-    - LAST VERSION DATE -> [2021-10-26]
+    - LAST VERSION DATE -> [2021-10-29]
     - Main purpose of this kernel is to be up to the
       latest tag of linux 4.9 with the best delivery of
       performance and battery to use as is.
@@ -16,7 +16,7 @@
 *********************************************************
     - CAF TAG ON LATEST KERNEL VERSION -> [LA.UM.9.6.2.c25-01100-89xx.0]
     - DEFAULT GOVERNOR -> [SCHEDUTIL]
-    - DEFAULT I/O SCHEDULER -> [NOOP]
+    - DEFAULT I/O SCHEDULER -> [BFQ]
     - DEFAULT TCP CONGESTION CONTROL -> [BBR with backport optimization]
     - LATENCY IS PREFERRED TO THROUGHPUT -> [SMOOTH EXPERIENCE with bad benchmark]
     - TOOLCHAIN OPTIMIZATION -> [MCPU/MTUNE/LTO/O3/FUNSAFE-MATH-OPTIMIZATIONS]
@@ -24,6 +24,8 @@
     - ARM64 OPTIMIZATIONS
     - MSM8953 OPTIMIZATIONS
     - RAPID GC F2FS by arter97
+    - F2FS OPTIMIZATIONS
+    - EXT4 OPTIMIZATIONS
     - WIREGUARD V1.0.20210606
     - NETWORK IMPROVEMENT
     - GPU IMPROVEMENT
@@ -31,6 +33,8 @@
     - BATTERY IMPROVEMENT
     - VM VALUES TWEAKED
     - BOEFFLA WAKELOCK BLOCKER
+    - HIGH PRIORITY WORKQUEUE
+    - POWER EFFICIENT WORKQUEUE
     - CPU SCHEDULER (CFS) TWEAKED FROM LIQUORIX/ZEN KERNEL
     - DTS EAGLE
     - DYNAMIC FSYNC V2 -> ENABLED BY DEFAULT
