@@ -2,11 +2,11 @@
 ==========================INFO===========================
 *********************************************************
     - KERNEL NAME -> [BasiK]
-    - LINUX KERNEL VERSION -> [4.9.288]
-    - CUSTOM KERNEL VERSION -> [#0]
+    - LINUX KERNEL VERSION -> [4.9.289]
+    - CUSTOM KERNEL VERSION -> [#2]
     - LAST TOOLCHAIN VERSION AT RELEASE KERNEL DATE -> [vortex-clang(14)]
     - TARGET ANDROID VERSION -> [11]
-    - LAST VERSION DATE -> [2021-10-29]
+    - LAST VERSION DATE -> [2021-11-09]
     - Main purpose of this kernel is to be up to the
       latest tag of linux 4.9 with the best delivery of
       performance and battery to use as is.
@@ -16,11 +16,12 @@
 *********************************************************
     - CAF TAG ON LATEST KERNEL VERSION -> [LA.UM.9.6.2.c25-01100-89xx.0]
     - DEFAULT GOVERNOR -> [SCHEDUTIL]
-    - DEFAULT I/O SCHEDULER -> [BFQ]
-    - DEFAULT TCP CONGESTION CONTROL -> [BBR with backport optimization]
+    - DEFAULT I/O SCHEDULER -> [NOOP]
+    - DEFAULT TCP CONGESTION CONTROL -> [BBR/FQ_CODEL with backport optimization]
     - LATENCY IS PREFERRED TO THROUGHPUT -> [SMOOTH EXPERIENCE with bad benchmark]
-    - TOOLCHAIN OPTIMIZATION -> [MCPU/MTUNE/LTO/O3/FUNSAFE-MATH-OPTIMIZATIONS]
+    - TOOLCHAIN OPTIMIZATION -> [MCPU/MTUNE/LTO/O3/POLLY/FUNSAFE-MATH-OPTIMIZATIONS]
     - MANY DEBUGGER DISABLED -> [PERFORMANCE/BATTERY GAIN]
+    - FIX DIRECT REFERENCE TO HZ
     - ARM64 OPTIMIZATIONS
     - MSM8953 OPTIMIZATIONS
     - RAPID GC F2FS by arter97
@@ -29,9 +30,9 @@
     - WIREGUARD V1.0.20210606
     - NETWORK IMPROVEMENT
     - GPU IMPROVEMENT
-    - SOUND IMPROVEMENT
+    - SOUND QUALITY IMPROVEMENT
     - BATTERY IMPROVEMENT
-    - VM VALUES TWEAKED
+    - SYSCTL VALUES TWEAKED
     - BOEFFLA WAKELOCK BLOCKER
     - HIGH PRIORITY WORKQUEUE
     - POWER EFFICIENT WORKQUEUE
@@ -42,4 +43,4 @@
     - TOUCHBOOST -> DISABLED BY DEFAULT
     - SIMPLE LMK by kerneltoast
     - KCAL
-    - BACKPORT OPTIMIZATION FROM OTHER KERNEL VERSION 
+    - BACKPORT OPTIMIZATION FROM UPSTREAM KERNEL VERSION 
