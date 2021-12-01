@@ -396,8 +396,6 @@ struct sock {
 	u32			sk_pacing_status; /* see enum sk_pacing */
 	long			sk_sndtimeo;
 	struct timer_list	sk_timer;
-	__u32			sk_priority;
-	__u32			sk_mark;
 	u32			sk_pacing_rate; /* bytes per second */
 	u32			sk_max_pacing_rate;
 	struct page_frag	sk_frag;
@@ -432,6 +430,8 @@ struct sock {
 				sk_err_soft;
 	u32			sk_ack_backlog;
 	u32			sk_max_ack_backlog;
+	__u32			sk_priority;
+	__u32			sk_mark;
 	kuid_t			sk_uid;
 	spinlock_t		sk_peer_lock;
 	struct pid		*sk_peer_pid;
