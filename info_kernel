@@ -2,11 +2,11 @@
 ==========================INFO===========================
 *********************************************************
     - KERNEL NAME -> [BasiK]
-    - LINUX KERNEL VERSION -> [4.9.289]
+    - LINUX KERNEL VERSION -> [4.9.291]
     - CUSTOM KERNEL VERSION -> [#2]
     - LAST TOOLCHAIN VERSION AT RELEASE KERNEL DATE -> [vortex-clang(14)]
     - TARGET ANDROID VERSION -> [11]
-    - LAST VERSION DATE -> [2021-11-09]
+    - LAST VERSION DATE -> [2021-12-03]
     - Main purpose of this kernel is to be up to the
       latest tag of linux 4.9 with the best delivery of
       performance and battery to use as is.
@@ -15,8 +15,8 @@
 =========================FEATURE=========================
 *********************************************************
     - CAF TAG ON LATEST KERNEL VERSION -> [LA.UM.9.6.2.c25-01100-89xx.0]
-    - DEFAULT GOVERNOR -> [SCHEDUTIL]
-    - DEFAULT I/O SCHEDULER -> [NOOP]
+    - DEFAULT GOVERNOR -> [BLU_SCHEDUTIL at RT priority]
+    - DEFAULT I/O SCHEDULER -> [ANXIETY]
     - DEFAULT TCP CONGESTION CONTROL -> [BBR/FQ_CODEL with backport optimization]
     - LATENCY IS PREFERRED TO THROUGHPUT -> [SMOOTH EXPERIENCE with bad benchmark]
     - TOOLCHAIN OPTIMIZATION -> [MCPU/MTUNE/LTO/O3/POLLY/FUNSAFE-MATH-OPTIMIZATIONS]
